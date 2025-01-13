@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:flup_karaoke/configuration/app_router.gr.dart';
 import 'package:flup_karaoke/configuration/constants.dart';
 import 'package:flup_karaoke/constants/mamiiranda.dart';
 import 'package:flup_karaoke/database/database.dart';
@@ -10,6 +9,7 @@ import 'package:flup_karaoke/generated/l10n.dart';
 import 'package:flup_karaoke/helper/ip_helper.dart';
 import 'package:flup_karaoke/main.dart';
 import 'package:flup_karaoke/mock/karaoke_api_service_mock.dart';
+import 'package:flup_karaoke/routes/app_router.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -46,12 +46,13 @@ class _LoginViewState extends State<LoginView> {
       final theme = Theme.of(context);
       return Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: theme.colorScheme.background,
+        backgroundColor: theme.colorScheme.surface,
         appBar: AppBar(backgroundColor: Colors.transparent, actions: [
           if (isMockOn)
             IconButton(
               onPressed: () {
-                GetIt.I.registerSingleton<KaraokeApiService>(KaraokeApiServiceMock());
+                GetIt.I.registerSingleton<KaraokeApiService>(
+                    KaraokeApiServiceMock());
                 AutoRouter.of(context).replace(const HomeRoute());
               },
               icon: const Icon(Icons.home),
@@ -64,20 +65,25 @@ class _LoginViewState extends State<LoginView> {
             onPressed: () => db.toggleDarkMode(context),
             icon: ValueListenableBuilder(
               valueListenable: FlupKApp.of(context).darkMode,
-              builder: (context, value, child) => value == true ? const Icon(Icons.light_mode) : const Icon(Icons.dark_mode),
+              builder: (context, value, child) => value == true
+                  ? const Icon(Icons.light_mode)
+                  : const Icon(Icons.dark_mode),
             ),
           ),
         ]),
         extendBodyBehindAppBar: true,
         body: SafeArea(
           child: Center(
-            child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+            child:
+                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 32.0),
                 child: FittedBox(
                   child: Text(
                     FlupS.of(context).appName,
-                    style: theme.textTheme.displayLarge?.copyWith(fontWeight: FontWeight.w700, color: theme.colorScheme.onPrimaryContainer),
+                    style: theme.textTheme.displayLarge?.copyWith(
+                        fontWeight: FontWeight.w700,
+                        color: theme.colorScheme.onPrimaryContainer),
                   ),
                 ),
               ),
@@ -85,7 +91,11 @@ class _LoginViewState extends State<LoginView> {
                 flex: 6,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 32.0),
-                  child: FlupKApp.of(context).currentFish.value.icon.image(fit: BoxFit.contain),
+                  child: FlupKApp.of(context)
+                      .currentFish
+                      .value
+                      .icon
+                      .image(fit: BoxFit.contain),
                 ),
               ),
               _body(context),
@@ -96,7 +106,8 @@ class _LoginViewState extends State<LoginView> {
                   TextSpan(
                     text: mamiirandaName,
                     style: const TextStyle(color: Colors.blue),
-                    recognizer: TapGestureRecognizer()..onTap = () => launchUrlString(linktreeUrl),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () => launchUrlString(linktreeUrl),
                   ),
                 ]),
               ),
@@ -110,10 +121,12 @@ class _LoginViewState extends State<LoginView> {
 
   Widget _body(BuildContext context) {
     final newServerButton = TextButton(
-      onPressed: () => showDialog(context: context, useSafeArea: true, builder: (context) => const ManualConnectDialog()),
+      onPressed: () => showDialog(
+          context: context, builder: (context) => const ManualConnectDialog()),
       child: Text(FlupS.of(context).insertNewServer),
     );
-    final optionsRow = Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+    final optionsRow =
+        Row(mainAxisAlignment: MainAxisAlignment.center, children: [
       IconButton(
         padding: EdgeInsets.zero,
         color: Colors.black.withOpacity(0.08),
@@ -179,7 +192,11 @@ class _LoginViewState extends State<LoginView> {
     if (!testHost) return showCurrentServerError(server);
 
     db.setCurrentServer(server);
-    final service = isMockOn ? KaraokeApiServiceMock() : KaraokeApiService(configuration: KaraokeAPIConfiguration(baseUrl: formatHost(ip)?.toString() ?? ip));
+    final service = isMockOn
+        ? KaraokeApiServiceMock()
+        : KaraokeApiService(
+            configuration: KaraokeAPIConfiguration(
+                baseUrl: formatHost(ip)?.toString() ?? ip));
     GetIt.I.registerSingleton<KaraokeApiService>(service);
     AutoRouter.of(context).replaceAll([const HomeRoute()]);
   }
@@ -188,7 +205,10 @@ class _LoginViewState extends State<LoginView> {
     final snackBar = SnackBar(
       content: Text(
         FlupS.of(context).serverIsNotAvailable(server.name),
-        style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Theme.of(context).colorScheme.onError),
+        style: Theme.of(context)
+            .textTheme
+            .bodyMedium
+            ?.copyWith(color: Theme.of(context).colorScheme.onError),
       ),
       elevation: 8,
       backgroundColor: Theme.of(context).colorScheme.error,

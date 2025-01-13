@@ -32,25 +32,46 @@ class _SingersViewState extends State<SingersView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(FlupS.of(context).singers)),
+      appBar: AppBar(
+        title: Text(FlupS.of(context).singers),
+        actions: [
+          IconButton(
+              onPressed: () {},
+              icon: Icon(
+                Icons.person_add_alt_1,
+                color: Theme.of(context).colorScheme.primary,
+              )),
+        ],
+      ),
       body: SafeArea(
         child: ValueListenableBuilder(
           valueListenable: singers,
           builder: (context, singers, child) {
-            if (singers == null) return const Center(child: CircularProgressIndicator.adaptive());
-
-            if (singers.isEmpty) return const Center(child: NoSingersFoundWidget());
-
+            if (singers == null) {
+              return const Center(child: CircularProgressIndicator.adaptive());
+            }
+            if (singers.isEmpty) {
+              return const Center(child: NoSingersFoundWidget());
+            }
             return ListView.separated(
-              separatorBuilder: (_, __) => const Divider(),
+              separatorBuilder: (_, __) {
+                final primaryContainer =
+                    Theme.of(context).colorScheme.onPrimaryContainer;
+                return Divider(
+                  color: primaryContainer,
+                );
+              },
               itemCount: singers.length,
               itemBuilder: (context, index) => ListTile(
                 trailing: IconButton(
                   icon: const Icon(Icons.more_vert),
                   onPressed: () => showModalBottomSheet(
                     context: context,
-                    shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(16))),
-                    builder: (context) => SingerOptionsModal(singer: singers[index]),
+                    shape: const RoundedRectangleBorder(
+                        borderRadius:
+                            BorderRadius.vertical(top: Radius.circular(16))),
+                    builder: (context) =>
+                        SingerOptionsModal(singer: singers[index]),
                   ).then(refresh),
                 ),
                 leading: Image.network(
@@ -61,7 +82,9 @@ class _SingersViewState extends State<SingersView> {
                   errorBuilder: (_, __, ___) => const Icon(Icons.person),
                 ),
                 title: Text(singers[index].name ?? ''),
-                subtitle: Text(singers[index].active == true ? FlupS.of(context).active : FlupS.of(context).inactive),
+                subtitle: Text(singers[index].active == true
+                    ? FlupS.of(context).active
+                    : FlupS.of(context).inactive),
               ),
             );
           },

@@ -9,11 +9,11 @@ const appBarTheme = AppBarTheme(
 );
 
 const buttonStyle = ButtonStyle(
-  minimumSize: MaterialStatePropertyAll(Size(0, 42)),
-  fixedSize: MaterialStatePropertyAll(null),
-  maximumSize: MaterialStatePropertyAll(null),
-  padding: MaterialStatePropertyAll(EdgeInsets.symmetric(horizontal: 16)),
-  shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16)))),
+  minimumSize: WidgetStatePropertyAll(Size(0, 42)),
+  fixedSize: WidgetStatePropertyAll(null),
+  maximumSize: WidgetStatePropertyAll(null),
+  padding: WidgetStatePropertyAll(EdgeInsets.symmetric(horizontal: 16)),
+  shape: WidgetStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16)))),
 );
 
 const dialogTheme = DialogTheme(
@@ -35,7 +35,7 @@ ThemeData createWithCustomizations({
     extensions: extensions,
     cardTheme: cardTheme,
     dialogTheme: dialogTheme,
-    appBarTheme: appBarTheme,
+    appBarTheme: appBarTheme.copyWith(foregroundColor: colorScheme?.primary, iconTheme: IconThemeData(color: colorScheme?.primary)),
     elevatedButtonTheme: const ElevatedButtonThemeData(style: buttonStyle),
     filledButtonTheme: const FilledButtonThemeData(style: buttonStyle),
     outlinedButtonTheme: const OutlinedButtonThemeData(style: buttonStyle),

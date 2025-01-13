@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:flup_karaoke/configuration/app_router.gr.dart';
+import 'package:flup_karaoke/routes/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:karaoke_request_api/karaoke_request_api.dart';
 

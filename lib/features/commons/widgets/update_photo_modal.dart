@@ -32,19 +32,22 @@ class _UpdatePhotoModalState extends State<UpdatePhotoModal> {
           leading: const Icon(Icons.photo_library),
           title: Text(FlupS.of(context).chooseFromLibrary),
           onTap: () async {
-            final image = await FilePicker.platform.pickFiles(type: FileType.image);
+            final image =
+                await FilePicker.platform.pickFiles(type: FileType.image);
             final path = image?.files.single.path;
             if (path == null) return;
 
             final cropped = await ImageCropper.platform.cropImage(
               sourcePath: path,
-              aspectRatioPresets: [CropAspectRatioPreset.square],
+              aspectRatio: const CropAspectRatio(ratioX: 1.0, ratioY: 1.0),
               maxHeight: 512,
               maxWidth: 512,
             );
             if (cropped == null) return;
 
-            final imageFile = MultipartFile.fromBytes(await cropped.readAsBytes(), filename: 'image.${cropped.path.split('.').last}');
+            final imageFile = MultipartFile.fromBytes(
+                await cropped.readAsBytes(),
+                filename: 'image.${cropped.path.split('.').last}');
 
             service.editSinger(widget.singer, imageFile);
           },

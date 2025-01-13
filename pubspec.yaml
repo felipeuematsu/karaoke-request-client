@@ -18,23 +18,24 @@ dependencies:
   dio: any
   shared_preferences: ^2.2.1
   karaoke_request_api:
-    hosted: https://dart.pkg.jetbrains.space/flup/p/main/flup/
-    version: ^1.9.2
+    git:
+      url: https://github.com/felipeuematsu/karaoke_request_api.git
+      ref: 1.9.2
 
   material_color_utilities: any
   flutter_secure_storage: ^9.0.0
   youtube_explode_dart: ^2.0.2
-  auto_route: ^7.8.4
-  get_it: ^7.2.0
-  uni_links: ^0.5.1
+  auto_route: ^9.2.2
+  get_it: ^8.0.0
+  app_links: ^6.3.2
   focus_detector: ^2.0.1
-  url_strategy: ^0.2.0
+  url_strategy: ^0.3.0
   url_launcher: ^6.1.7
   flutter_svg: ^2.0.7
   universal_html: ^2.0.8
   dynamic_color: ^1.6.6
   json_annotation: ^4.8.1
-  intl: ^0.18.0
+  intl: 0.19.0
   path_provider: ^2.1.1
   infinite_scroll_pagination: ^4.0.0
   gap: ^3.0.1
@@ -45,12 +46,12 @@ dependencies:
 
 dev_dependencies:
   freezed: ^2.4.1
-  auto_route_generator: ^7.3.1
+  auto_route_generator: ^9.0.0
   build_runner: ^2.1.6
   flutter_gen_runner:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^3.0.0
+  flutter_lints: ^5.0.0
   json_serializable: ^6.7.1
 
 

@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:auto_route/auto_route.dart';
-import 'package:flup_karaoke/configuration/app_router.gr.dart';
 import 'package:flup_karaoke/configuration/constants.dart';
 import 'package:flup_karaoke/database/database.dart';
 import 'package:flup_karaoke/database/model/server_record.dart';
@@ -9,6 +8,7 @@ import 'package:flup_karaoke/features/login/controller/login_controller.dart';
 import 'package:flup_karaoke/generated/l10n.dart';
 import 'package:flup_karaoke/helper/ip_helper.dart';
 import 'package:flup_karaoke/mock/karaoke_api_service_mock.dart';
+import 'package:flup_karaoke/routes/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get_it/get_it.dart';

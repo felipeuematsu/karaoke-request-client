@@ -1,8 +1,7 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:flup_karaoke/configuration/app_router.dart';
-import 'package:flup_karaoke/configuration/app_router.gr.dart';
 import 'package:flup_karaoke/features/profile_menu/view/components/profile_menu_tile.dart';
 import 'package:flup_karaoke/generated/l10n.dart';
+import 'package:flup_karaoke/routes/app_router.dart';
 import 'package:flutter/material.dart';
 
 @RoutePage()

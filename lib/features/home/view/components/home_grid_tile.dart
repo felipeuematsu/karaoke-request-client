@@ -12,6 +12,7 @@ class HomeGridTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: Theme.of(context).colorScheme.surface,
       child: InkWell(
         borderRadius: BorderRadius.circular(16),
         onTap: () => AutoRouter.of(context).push(route),

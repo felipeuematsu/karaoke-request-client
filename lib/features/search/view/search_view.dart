@@ -1,8 +1,8 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:flup_karaoke/configuration/app_router.gr.dart';
 import 'package:flup_karaoke/features/search/controller/search_view_controller.dart';
 import 'package:flup_karaoke/features/search/view/components/search_bar_component.dart';
 import 'package:flup_karaoke/features/search/view/components/search_results_component.dart';
+import 'package:flup_karaoke/routes/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
@@ -27,7 +27,7 @@ class _SearchViewState extends State<SearchView> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(title: const Text('Search'), actions: [
         IconButton(
           icon: const Icon(Icons.login),

@@ -2,11 +2,11 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:auto_route/auto_route.dart';
-import 'package:flup_karaoke/configuration/app_router.gr.dart';
 import 'package:flup_karaoke/extensions/duration.dart';
 import 'package:flup_karaoke/features/now_playing/controller/mini_player_controller.dart';
 import 'package:flup_karaoke/features/now_playing/view/components/now_playing_image_slider.dart';
 import 'package:flup_karaoke/generated/l10n.dart';
+import 'package:flup_karaoke/routes/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get_it/get_it.dart';
@@ -44,8 +44,8 @@ class _NowPlayingViewState extends State<NowPlayingView> {
 
   @override
   Widget build(BuildContext context) {
-    final titleColor = Theme.of(context).colorScheme.onBackground;
-    final subtitleColor = Theme.of(context).colorScheme.onBackground.withOpacity(0.5);
+    final titleColor = Theme.of(context).colorScheme.onSurface;
+    final subtitleColor = Theme.of(context).colorScheme.onSurface.withOpacity(0.5);
     return Scaffold(
       appBar: AppBar(title: FittedBox(child: Text(FlupS.of(context).nowPlaying)), actions: [
         IconButton(
@@ -101,7 +101,7 @@ class _NowPlayingViewState extends State<NowPlayingView> {
                 value: ((value?.position ?? 0) / (value?.song?.duration ?? 1)).toDouble(),
                 borderRadius: BorderRadius.circular(16),
                 minHeight: 8,
-                backgroundColor: Theme.of(context).colorScheme.onBackground.withOpacity(0.1),
+                backgroundColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.1),
                 valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).colorScheme.primary),
               ),
             ),

@@ -14,7 +14,6 @@ enum FishAssets {
     return switch (this) {
       FishAssets.happy => colorScheme.copyWith(
             surface: customColors.happyfishContainer,
-            background: customColors.happyfishContainer,
             primary: customColors.happyfish,
             primaryContainer: customColors.happyfishContainer,
             onPrimary: customColors.onHappyfish,
@@ -22,23 +21,20 @@ enum FishAssets {
           ),
       FishAssets.sad => colorScheme.copyWith(
             surface: customColors.sadfishlightContainer,
-            background: customColors.sadfishlightContainer,
             primary: customColors.sadfishlight,
             primaryContainer: customColors.sadfishlightContainer,
             onPrimary: customColors.onSadfishlight,
             onPrimaryContainer: customColors.onSadfishlightContainer,
           ),
       FishAssets.singing => colorScheme.copyWith(
-            surface: customColors.singingfishlightContainer,
-            background: customColors.singingfishlightContainer,
-            primary: customColors.singingfishlight,
-            primaryContainer: customColors.singingfishlightContainer,
+            surface: customColors.primary90ContainerSingingFishLight,
+            primary: customColors.primary40SingingFishLight,
+            primaryContainer: customColors.primary90ContainerSingingFishLight,
             onPrimary: customColors.onSingingfishlight,
-            onPrimaryContainer: customColors.onSingingfishlightContainer,
+            onPrimaryContainer: customColors.onPrimary10ContainerSingingFishLight,
           ),
       FishAssets.surprised => colorScheme.copyWith(
             surface: colorScheme.secondaryContainer,
-            background: colorScheme.secondaryContainer,
             primary: colorScheme.secondary,
             primaryContainer: colorScheme.secondaryContainer,
             onPrimary: colorScheme.onSecondary,
@@ -46,7 +42,6 @@ enum FishAssets {
           ),
       FishAssets.double => colorScheme.copyWith(
             surface: customColors.twofishdetailContainer,
-            background: customColors.twofishdetailContainer,
             primary: customColors.twofishdetail,
             primaryContainer: customColors.twofishdetailContainer,
             onPrimary: customColors.onTwofishdetail,

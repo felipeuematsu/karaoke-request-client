@@ -27,7 +27,7 @@ class NowPlayingImageSlider extends StatelessWidget {
             startAngle: 165,
             customWidths: CustomSliderWidths(progressBarWidth: 8, trackWidth: 8, handlerSize: 0),
             customColors: CustomSliderColors(
-              trackColor: Theme.of(context).colorScheme.onBackground.withOpacity(0.1),
+              trackColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.1),
               progressBarColors: [Theme.of(context).colorScheme.primary, Theme.of(context).colorScheme.primary, Theme.of(context).colorScheme.secondary],
               dotColor: Theme.of(context).colorScheme.primary,
             ),

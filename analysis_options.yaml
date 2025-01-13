@@ -41,7 +41,6 @@ linter:
     # Might become obsolete with Non-Nullable types
     # pedantic: enabled
     # http://dart-lang.github.io/linter/lints/always_require_non_null_named_parameters.html
-    - always_require_non_null_named_parameters
 
     # Since dart 2.0 dart is a sound language, specifying types is not required anymore.
     # `var foo = 10;` is enough information for the compiler to make foo a int.
@@ -184,7 +183,6 @@ linter:
     # Don't use `Future?`, therefore never return null instead of a Future.
     # Will become obsolete one Non-Nullable types land
     # https://dart-lang.github.io/linter/lints/avoid_returning_null_for_future.html
-    - avoid_returning_null_for_future
 
     # Use empty returns, don't show off with you knowledge about dart internals.
     # https://dart-lang.github.io/linter/lints/avoid_returning_null_for_void.html

@@ -16,7 +16,7 @@ class LanguageSelectView extends StatelessWidget {
           itemCount: appLocales.length,
           itemBuilder: (context, index) => ListTile(
             title: Text(appLocaleText(appLocales[index])),
-            onTap: () => updateAppLocale(appLocales[index], context).then((value) => AutoRouter.of(context).pop()),
+            onTap: () => updateAppLocale(appLocales[index], context).then((value) => Navigator.of(context).pop()),
           ),
         ),
       ),
