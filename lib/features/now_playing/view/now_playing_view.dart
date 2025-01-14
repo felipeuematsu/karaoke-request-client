@@ -32,8 +32,16 @@ class _NowPlayingViewState extends State<NowPlayingView> {
   }
 
   Future<void> refresh(_) async {
-    await service.getVolume().then((value) => nowPlayingController.currentVolume.value = value);
-    await service.getNowPlayingSong().then((value) => nowPlayingController.nowPlayingSong.value = value);
+    try {
+      await service
+          .getVolume()
+          .then((value) => nowPlayingController.currentVolume.value = value);
+      await service
+          .getNowPlayingSong()
+          .then((value) => nowPlayingController.nowPlayingSong.value = value);
+    } catch (e) {
+      // ignore
+    }
   }
 
   @override
@@ -45,14 +53,17 @@ class _NowPlayingViewState extends State<NowPlayingView> {
   @override
   Widget build(BuildContext context) {
     final titleColor = Theme.of(context).colorScheme.onSurface;
-    final subtitleColor = Theme.of(context).colorScheme.onSurface.withOpacity(0.5);
+    final subtitleColor =
+        Theme.of(context).colorScheme.onSurface.withOpacity(0.5);
     return Scaffold(
-      appBar: AppBar(title: FittedBox(child: Text(FlupS.of(context).nowPlaying)), actions: [
-        IconButton(
-          icon: const Icon(Icons.queue_music),
-          onPressed: () => AutoRouter.of(context).push(const QueueRoute()),
-        ),
-      ]),
+      appBar: AppBar(
+          title: FittedBox(child: Text(FlupS.of(context).nowPlaying)),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.queue_music),
+              onPressed: () => AutoRouter.of(context).push(const QueueRoute()),
+            ),
+          ]),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(32),
@@ -64,12 +75,20 @@ class _NowPlayingViewState extends State<NowPlayingView> {
               return SizedBox.square(
                 dimension: size,
                 child: Stack(children: [
-                  Positioned.fill(child: NowPlayingImageSlider(service: service, nowPlayingController: nowPlayingController)),
+                  Positioned.fill(
+                      child: NowPlayingImageSlider(
+                          service: service,
+                          nowPlayingController: nowPlayingController)),
                   Positioned(
                     left: 0,
                     right: 0,
                     top: (MediaQuery.of(context).size.width - 64) * 0.7,
-                    child: const IgnorePointer(child: Row(children: [Icon(Icons.volume_down, size: 32), Spacer(), Icon(Icons.volume_up, size: 32)])),
+                    child: const IgnorePointer(
+                        child: Row(children: [
+                      Icon(Icons.volume_down, size: 32),
+                      Spacer(),
+                      Icon(Icons.volume_up, size: 32)
+                    ])),
                   ),
                 ]),
               );
@@ -79,7 +98,10 @@ class _NowPlayingViewState extends State<NowPlayingView> {
               valueListenable: nowPlayingController.nowPlayingSong,
               builder: (context, value, _) => Text(
                 value?.song?.title ?? FlupS.of(context).noSongPlaying,
-                style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold, color: titleColor),
+                style: Theme.of(context)
+                    .textTheme
+                    .headlineMedium
+                    ?.copyWith(fontWeight: FontWeight.bold, color: titleColor),
                 textAlign: TextAlign.center,
                 maxLines: 2,
               ),
@@ -89,7 +111,10 @@ class _NowPlayingViewState extends State<NowPlayingView> {
               valueListenable: nowPlayingController.nowPlayingSong,
               builder: (context, value, _) => Text(
                 value?.song?.artist ?? '',
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(color: subtitleColor),
+                style: Theme.of(context)
+                    .textTheme
+                    .bodySmall
+                    ?.copyWith(color: subtitleColor),
                 textAlign: TextAlign.center,
                 maxLines: 2,
               ),
@@ -98,22 +123,31 @@ class _NowPlayingViewState extends State<NowPlayingView> {
             ValueListenableBuilder(
               valueListenable: nowPlayingController.nowPlayingSong,
               builder: (context, value, _) => LinearProgressIndicator(
-                value: ((value?.position ?? 0) / (value?.song?.duration ?? 1)).toDouble(),
+                value: ((value?.position ?? 0) / (value?.song?.duration ?? 1))
+                    .toDouble(),
                 borderRadius: BorderRadius.circular(16),
                 minHeight: 8,
-                backgroundColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.1),
-                valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).colorScheme.primary),
+                backgroundColor:
+                    Theme.of(context).colorScheme.onSurface.withOpacity(0.1),
+                valueColor: AlwaysStoppedAnimation<Color>(
+                    Theme.of(context).colorScheme.primary),
               ),
             ),
             const MaxGap(4),
             DefaultTextStyle(
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(color: subtitleColor) ?? const TextStyle(),
+              style: Theme.of(context)
+                      .textTheme
+                      .bodySmall
+                      ?.copyWith(color: subtitleColor) ??
+                  const TextStyle(),
               child: ValueListenableBuilder(
                 valueListenable: nowPlayingController.nowPlayingSong,
                 builder: (context, value, _) => Row(children: [
-                  Text(Duration(seconds: value?.position ?? 0).toMinutesSeconds()),
+                  Text(Duration(seconds: value?.position ?? 0)
+                      .toMinutesSeconds()),
                   const Spacer(),
-                  Text('-${Duration(seconds: value?.song?.duration ?? 0).toMinutesSeconds()}'),
+                  Text(
+                      '-${Duration(seconds: value?.song?.duration ?? 0).toMinutesSeconds()}'),
                 ]),
               ),
             ),
@@ -130,8 +164,11 @@ class _NowPlayingViewState extends State<NowPlayingView> {
                 valueListenable: nowPlayingController.nowPlayingSong,
                 builder: (context, value, _) => IconButton(
                   iconSize: 96,
-                  icon: value?.isPlaying == true ? const Icon(Icons.pause) : const Icon(Icons.play_arrow),
-                  onPressed: value?.isPlaying == true ? service.pause : service.play,
+                  icon: value?.isPlaying == true
+                      ? const Icon(Icons.pause)
+                      : const Icon(Icons.play_arrow),
+                  onPressed:
+                      value?.isPlaying == true ? service.pause : service.play,
                   color: titleColor,
                 ),
               ),
