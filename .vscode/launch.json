@@ -1,0 +1,47 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Flutter",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/main.dart",
+            "toolArgs": [
+                "--dart-define",
+                "mock=true"
+            ],
+            "args": [
+                "--dart-define",
+                "mock=true"
+            ]
+        },
+        {
+            "name": "flup_karaoke",
+            "request": "launch",
+            "type": "dart",
+            "toolArgs": [
+                "--dart-define",
+                "mock=true"
+            ],
+            "args": [
+                "--dart-define",
+                "mock=true"
+            ]
+        },
+        {
+            "name": "flup_karaoke (profile mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "flup_karaoke (release mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
+    ]
+}
